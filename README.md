@@ -1,5 +1,7 @@
 # 📸 Photo Transfer Using QR Code
 
+First Extract the pythonfile.rar where we have the python codes and the android software to scan
+
 A simple photo transfer system that transfers images from a Windows PC to an Android device using QR codes.
 
 The project uses a **Python sender** on the PC and a **Flutter Android receiver**. The selected image is compressed into JPEG data, divided into smaller chunks, converted into QR codes, and then scanned by the Android application.
