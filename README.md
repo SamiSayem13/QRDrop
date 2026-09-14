@@ -70,3 +70,48 @@ The Android app collects all QR data, reconstructs the original JPEG image, and 
                     │
                     ▼
               Save to Gallery
+
+
+### QR Code Transfer Workflow
+
+The application uses a **Sender → QR Show → Android Receiver** workflow to transfer image/file data through QR codes.
+
+1. The **Sender** reads the original data directly without compressing or resizing it.
+2. The data is divided into **1500-byte chunks**.
+3. Each chunk is encoded using **Base64**.
+4. Each chunk is converted into a QR code using the packet format:
+
+```text
+PIXEL|frame_index|total_frames|width|height|base64_data
+```
+
+5. The generated QR frames are saved in the `GeneratedQr` folder.
+6. **QR Show** displays the generated QR codes one by one in the correct frame order.
+7. The **Android Receiver app** scans each QR code using the phone's camera.
+8. The receiver collects the scanned frames using their `frame_index` and `total_frames` values.
+9. After all frames are received, the Android app reconstructs the original data and restores the original image/file.
+
+### Overall Flow
+
+```text
+Original File/Image
+        ↓
+     Sender
+        ↓
+  Split into Chunks
+        ↓
+     Base64
+        ↓
+   Generate QR Codes
+        ↓
+    QR Show
+        ↓
+  📱 Android Receiver
+        ↓
+    Scan QR Codes
+        ↓
+ Reconstruct Data
+        ↓
+ Original File/Image
+```
+
