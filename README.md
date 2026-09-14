@@ -72,7 +72,7 @@ The Android app collects all QR data, reconstructs the original JPEG image, and 
                     │
                     ▼
               Save to Gallery
-```text
+
 
 ```
 ### QR Code Transfer Workflow
